@@ -1,0 +1,27 @@
+### 1. Login Automático
+# @name login
+POST http://localhost:3333/auth/login
+Content-Type: application/json
+
+{
+  "email": "dev@teste.com",
+  "password": "senha123segura"
+}
+
+### Guardar o token automaticamente
+@authToken = {{login.response.body.token}}
+
+### 2. Criar Tarefa Automática
+POST http://localhost:3333/tasks
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Minha Tarefa Automática",
+  "description": "Sem precisar copiar e colar nada!",
+  "priority": "HIGH"
+}
+
+### 3. Listar Tarefas
+GET http://localhost:3333/tasks
+Authorization: Bearer {{authToken}}
